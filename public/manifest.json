@@ -4,9 +4,9 @@
   "display": "standalone",
   "scope": "/",
   "start_url": "/",
-  "name": "Antotex",
-  "short_name": "ANTOTEX",
-  "description": "ANTOTEX",
+  "name": "Zapatillas Cali 11 Mayoristas",
+  "short_name": "ZC11 Mayoristas",
+  "description": "Zapatillas Cali 11 Mayoristas",
   "icons": [
     {
       "src": "/icon-192x192.png",
