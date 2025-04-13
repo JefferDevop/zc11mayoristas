@@ -17,7 +17,7 @@ export function Completed() {
 
   return (
     <div className={styles.completed}>
-      <h3>¡Gracias por tu compra!</h3>
+      <h3>¡Gracias por su compra!</h3>
       <br></br>
 
       <p>

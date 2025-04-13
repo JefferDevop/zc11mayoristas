@@ -82,25 +82,25 @@ export function ListCart({ product }) {
 
   // Cálculo del subtotal y descuentos
   const subtotal = product.reduce((acc, item) => {
-    const price =
-      item?.price_old > item?.price1
-        ? item?.price_old
-        : item?.price1;
-    return acc + price * item.quantity;
+    const priceOld = item?.price_old ?? 0;
+    const price2 = item?.price2 ?? 0;
+    const quantity = item?.quantity ?? 0;
+    const price = priceOld > price2 ? priceOld : price2;
+    return acc + price * quantity;
   }, 0);
 
   const descuento = product.reduce((acc, item) => {
-    const priceOld = item?.price_old;
-    const price1 = item?.price1;
-    const quantity = item.quantity;
+    const priceOld = item?.price_old ?? 0;
+    const price = item?.price2 ?? 0;
+    const quantity = item.quantity ?? 0;
 
     // Si algún valor es inválido o price_old no es mayor que price1, ignorar este producto
-    if (!priceOld || !price1 || !quantity || priceOld <= price1) {
+    if (!priceOld || !price || !quantity || priceOld <= price) {
       return acc;
     }
 
     // Acumular el descuento
-    return acc + (priceOld - price1) * quantity;
+    return acc + (priceOld - price) * quantity;
   }, 0);
 
   const handleNavigation = (path) => router.push(path);
@@ -132,28 +132,28 @@ export function ListCart({ product }) {
                 <p>
                   Unidad: ${" "}
                   {formatCurrency(
-                    item?.price_old > item?.price1
+                    item?.price_old > item?.price2
                       ? item?.price_old
-                      : item?.price1
+                      : item?.price2
                   )}
                 </p>
                 <p>
                   Subtotal: ${" "}
                   {formatCurrency(
-                    (item?.price_old > item?.price1
+                    (item?.price_old > item?.price2
                       ? item?.price_old
-                      : item?.price1) * item.quantity
+                      : item?.price2) * item.quantity
                   )}
                 </p>
                 {item?.price_old > 0 &&
-                  item?.price_old > item?.price1 && (
+                  item?.price_old > item?.price2 && (
                     <p>
                       Descuento:{" "}
                       <u>
                         ${" "}
                         {formatCurrency(
                           (item?.price_old -
-                            item?.price1) *
+                            item?.price2) *
                             item.quantity
                         )}
                       </u>

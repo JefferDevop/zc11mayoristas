@@ -49,6 +49,8 @@ export class User {
   }
 
     async addUserApi(data) {
+      console.log("--:", data);
+      
       try {
         const url = `${BASE_API}/api/users/`;
   

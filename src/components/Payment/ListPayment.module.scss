@@ -1,8 +1,14 @@
 .list {
   margin: 1rem;
+ 
+
+  hr{
+    color: white;
+  }
 
   h2{
     margin: 2rem 0;
+  
   }
 
   .loadingPayment {
@@ -24,6 +30,7 @@
     h2 {
       color: white;
     }
+    
 
   }
 
@@ -117,9 +124,16 @@
     color: rgb(156, 156, 156);
   }
 
+  p{
+    font-weight: 700;
+    text-transform: capitalize;
+    color: black;
+  }
+
   h6 {
     font-size: 1rem;
     text-transform: uppercase;
+   
   }
 
 }

@@ -16,10 +16,12 @@ export function AddAddress(props) {
   const { accesToken, user } = useAuth();
 
   const formik = useFormik({
-    initialValues: initialValues(),
+    initialValues: initialValues(user),
     validationSchema: validationSchema(),
     validateOnChange: false,
     onSubmit: async (formValue) => {
+      console.log(formValue);
+      
       try {
         const result = await addressCtrl.addAddress(
           formValue,
@@ -30,7 +32,7 @@ export function AddAddress(props) {
         toggleModal2();
         toggleAddress();
         addNewAddress(result);
-        toast.success("Address added successfully");
+        toast.success("Se creó una nueva dirección");
       } catch (error) {
         toast.error(error.message);
       }
@@ -102,7 +104,7 @@ export function AddAddress(props) {
             error={formik.errors.phone}
           />
         </div>
-        <div className={styles.input}>
+        {/* <div className={styles.input}>
           <Input
             type="text"
             name="email"
@@ -111,7 +113,7 @@ export function AddAddress(props) {
             onChange={formik.handleChange}
             error={formik.errors.email}
           />
-        </div>
+        </div> */}
 
         <Button block type="submit">
           Guardar
@@ -121,7 +123,7 @@ export function AddAddress(props) {
   );
 }
 
-function initialValues() {
+function initialValues(user) {
   return {
     title: "",
     name: "",
@@ -129,7 +131,7 @@ function initialValues() {
     address: "",
     city: "",
     phone: "",
-    email: "",
+    email: user?.email || "",
   };
 }
 

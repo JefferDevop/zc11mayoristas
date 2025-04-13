@@ -3,11 +3,26 @@ import { BASE_API } from "../config/constants";
 export class Payment {
   async createPayload(items, addressData, token) {
 
+    console.log(addressData);
+    
+
+    if (!items || items.length === 0) {
+      throw new Error("No hay productos en el carrito");
+    }
+    if (!addressData || !addressData.id) {
+      throw new Error("No hay dirección seleccionada");
+    }
+    if (!token) {
+      throw new Error("No hay token de autorización");
+    }
+
+
     const address = addressData.id;
     
     const bodyData = {
       items,
-      address
+      address,
+      wholesale: true,
     };
     
     

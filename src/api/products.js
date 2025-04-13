@@ -82,17 +82,18 @@ export class Products {
     }
   }
 
+
   async getProductByOfertAndExclusive() {
     try {
       const url = `${BASE_API}/api/productsOE/`;
       const response = await fetch(url);
-      const result = await response.json();
+     
 
-      if (response.status !== 200) throw result;
-
-      return result;
+      if (!response.ok) throw new Error(`Error ${response.status}`);
+      return await response.json();
     } catch (error) {
-      throw error;
+      console.error("Error en getProductByOfertAndExclusive:", error.message);
+      return [];
     }
   }
 }
