@@ -110,7 +110,7 @@ export function ListCart({ product }) {
       <h4>CARRITO</h4>
 
       {product.map((item) => (
-        <div key={item?.codigo} className={styles.card}>
+        <div key={item.index} className={styles.card}>
           <div className={styles.foot}>
             <p className={styles.name}>{item?.name_extend}</p>
           </div>
@@ -119,7 +119,7 @@ export function ListCart({ product }) {
               <BsTrash3
                 size="20"
                 color="gray"
-                onClick={() => deleteCart(item?.codigo)}
+                onClick={() => deleteCart(item?.code)}
               />
 
               <CardImg
@@ -163,12 +163,12 @@ export function ListCart({ product }) {
 
               <div className={styles.button}>
                 <AiOutlineMinusCircle
-                  onClick={() => decreaseCart(item.codigo)}
+                  onClick={() => decreaseCart(item.code)}
                   size={20}
                 />
                 <p>{item.quantity}</p>
                 <AiFillPlusCircle
-                  onClick={() => incrementCart(item.codigo)}
+                  onClick={() => incrementCart(item.code)}
                   size={20}
                 />
               </div>

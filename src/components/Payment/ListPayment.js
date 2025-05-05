@@ -29,7 +29,7 @@ const addressCtrl = new Address();
 export function ListPayment({ product, localAddress, authLoading }) {
   const [address, setAddresses] = useState(localAddress);
   const calculateShipping = (city) => {
-    return city?.trim().toLowerCase() === "cali" ? 10000 : 0;
+    return city?.trim().toLowerCase() === "cali" ? 0 : 0;
   };
 
   const { accesToken, login, logout, user } = useAuth();
@@ -263,7 +263,7 @@ export function ListPayment({ product, localAddress, authLoading }) {
 
         <div className={styles.detalle}>
           {map(product, (item) => (
-            <div key={item?.codigo} className={styles.card}>
+            <div key={item.index} className={styles.card}>
               <CardImg
                 alt="Card image cap"
                 src={BASE_NAME + (item?.images || item?.image_alterna)}

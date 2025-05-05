@@ -30,21 +30,74 @@ export function Available(props) {
   const [isOpen, setIsOpen] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [idProduct, setIdPropduct] = useState();
+  const [talla, setTalla] = useState('');
 
   const toggleModal = () => {
     setIsOpen(!isOpen);
   };
 
   const addData = () => {
-    addCart(idProduct, quantity);
+    addCart(idProduct, quantity, talla);
     toast.success("¡Se agrego con exito!");
     toggleModal();
   };
 
   const handleQuantityChange = (event) => {
+
+    if (event.target.value < 1) {
+      toast.error("¡La cantidad no puede ser menor a 1!");
+      return;
+    }
+    if (event.target.value > 100) {
+      toast.error("¡La cantidad no puede ser mayor a 100!");
+      return;
+    }
+    if (isNaN(event.target.value)) {
+      toast.error("¡La cantidad debe ser un número!");
+      return;
+    }
+    if (event.target.value === "") {
+      toast.error("¡La cantidad no puede estar vacía!");
+      return;
+    }
+    if (event.target.value === "0") {
+      toast.error("¡La cantidad no puede ser cero!");
+      return;
+    }
+    if (event.target.value === "-1") {
+      toast.error("¡La cantidad no puede ser menor a 1!");
+      return;
+    }
+
+    
     const value = parseInt(event.target.value);
     setQuantity(value);
   };
+
+  const handleTallaChange = (event) => {
+   
+    // if (event.target.value === "") {
+    //   toast.error("¡La talla no puede estar vacía!");
+    //   return;
+    // }
+    if (event.target.value.length > 2) {
+      toast.error("¡La talla no puede tener más de 2 caracteres!");
+      return;
+    }
+    if (event.target.value === "0") {
+      toast.error("¡La talla no puede ser cero!");
+      return;
+    }
+    if (event.target.value === "-1") {
+      toast.error("¡La talla no puede ser menor a 1!");
+      return;
+    }
+
+    
+    const value = event.target.value;
+    setTalla(value);
+  };
+
 
   const addProductId = (id) => {
     setIdPropduct(id);
@@ -89,7 +142,7 @@ export function Available(props) {
       </Button>
 
       <Modal centered isOpen={isOpen} toggle={toggleModal}>
-        <ModalHeader toggle={toggleModal}>Ingrese Cantidad</ModalHeader>
+      <ModalHeader toggle={toggleModal}>Cantidad y Talla</ModalHeader>
 
         <ModalBody>
           Cantidad
@@ -102,6 +155,19 @@ export function Available(props) {
               placeholder="Cantidad"
               onChange={handleQuantityChange}
             />
+
+<br></br>
+          
+          Talla
+          <Input
+            value={talla}
+            type="text"
+            name="talla"
+            id="talla"
+            placeholder="Talla"
+            onChange={handleTallaChange}
+          />
+          
           </FormGroup>
         </ModalBody>
 
@@ -117,3 +183,5 @@ export function Available(props) {
     </div>
   );
 }
+
+

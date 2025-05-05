@@ -27,7 +27,8 @@ export default function CartPage() {
 
           const response = await productCtrl.getProductById(item.id);
 
-          data.push({ ...response, quantity: item.quantity });
+          data.push({ ...response, quantity: item.quantity, talla: item.talla, code: item.code });
+
         }
         setProduct(data);
         setLoad(false);
